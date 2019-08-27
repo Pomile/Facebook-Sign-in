@@ -7,9 +7,12 @@ import session from 'express-session';
 import methodOverride from 'method-override';
 import routes from './src/route/index';
 
+const { NODE_ENV } = process.env;
 const app = express();
 dotenv.config();
-app.use(morgan('short'));
+if (NODE_ENV === 'production' || NODE_ENV === 'development') {
+  app.use(morgan('short'));
+}
 app.use(bodyParser.urlencoded({ extended: false, type: '*/x-www-form-urlencoded' }));
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(bodyParser.text({ type: 'text/html' }));
@@ -22,7 +25,7 @@ app.use(passport.session());
 
 app.get('/', (req, res) => res.status(200).send('<h1 style="color: blue;">Express Server Setup!</h1><p>Welcome home!</p>'));
 app.use('/api/v1/', routes);
-
+app.listen(3000);
 app.all('*', (req, res) => {
   res.status(404).json({ status: 404, msg: 'NOT FOUND' });
 });

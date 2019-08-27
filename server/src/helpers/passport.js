@@ -5,13 +5,9 @@ import dotenv from 'dotenv';
 const FacebookStrategy = facebookPassport.Strategy;
 
 dotenv.config();
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+passport.serializeUser((user, done) => done(null, user));
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+passport.deserializeUser((user, done) => done(null, user));
 
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
@@ -20,11 +16,10 @@ passport.use(new FacebookStrategy({
   profileFields: ['id', 'emails', 'name', 'photos']
 },
 async (accessToken, refreshToken, profile, done) => {
-  const user = profile;
   if(!profile.emails || !profile.emails.length){
     return done('No email with this account');
   }
-  return done(null, user);
+  return done(null, profile);
 }));
 
 export default passport;
