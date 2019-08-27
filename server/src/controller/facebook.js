@@ -1,10 +1,13 @@
 import '@babel/polyfill';
-import passport from 'passport-facebook';
+import passport from 'passport';
+import facebookPassport from 'passport-facebook';
+import dotenv from 'dotenv';
 
-const FacebookStrategy = passport.Strategy;
+dotenv.config();
+
 class Facebook {
   static async signIn(req, res) {
-
+    return res.status(200).send(req.user);
   }
 }
 

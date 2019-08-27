@@ -18,5 +18,17 @@ describe('TEST SUITE', () => {
           done();
         });
     });
+    it('should login with facebook', (done) => {
+      request(app)
+        .get('/api/v1/auth/facebook/callback')
+        .set('Accept', 'application/json')
+        .expect(302)
+        .end((err, res) => {
+          if (err) return done(err);
+          console.log(res);
+          expect(res.status).to.equal(302);
+          done();
+        });
+    });
   });
 });

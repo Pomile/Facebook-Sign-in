@@ -19,7 +19,8 @@
     "build": "rimraf dist && mkdir dist && npm run build-with-babel",
     "build-with-babel": "babel ./server -d dist",
     "start": "node ./dist/bin/www",
-    "mocha:test": "mocha --require @babel/register ./server/spec/tester.js --exit",
+    "start:dev": "node ./server/bin/www",
+    "mocha:test": "mocha --require @babel/register ./server/spec/tester.js --timeout 6000 --exit",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text npm run mocha:test",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -36,9 +37,12 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "body-parser": "^1.19.0",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "method-override": "^3.0.0",
     "morgan": "^1.9.1",
+    "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "passport-facebook-token": "^3.3.0"
   },
@@ -55,6 +59,7 @@
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
     "mocha": "^6.2.0",
+    "nodemon": "^1.19.1",
     "nyc": "^14.1.1",
     "rimraf": "^2.6.3",
     "supertest": "^4.0.2"
