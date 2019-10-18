@@ -25,7 +25,7 @@ app.use(passport.session());
 
 app.get('/', (req, res) => res.status(200).send('<h1 style="color: blue;">Express Server Setup!</h1><p>Welcome home!</p>'));
 app.use('/api/v1/', routes);
-app.listen(3000);
+app.listen(8000);
 app.all('*', (req, res) => {
   res.status(404).json({ status: 404, msg: 'NOT FOUND' });
 });

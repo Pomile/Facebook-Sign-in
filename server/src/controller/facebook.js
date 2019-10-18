@@ -7,8 +7,7 @@ dotenv.config();
 
 class Facebook {
   static async signIn(req, res) {
-    console.log('trying sometin');
-    return res.status(200).send(req.user);
+    return res.status(200).json({ user: req.user });
   }
 }
 
